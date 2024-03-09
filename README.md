@@ -8,7 +8,6 @@ func main() {
 	ctx:=context.Background()
 	invoice:="invoicexxxxxx"
 	fee:=50
-	ctx = metadata.AppendToOutgoingContext(ctx, "address", "1JSAbzibK4PLQp4U876o6wmCPV39Ry3wdp")
 	client := nubit.NewClient(&types.PaymentParams{
         XAPIKEY:"xxx"
     })
