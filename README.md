@@ -13,6 +13,13 @@ func main() {
     })
 	status:=client.Payment(ctx,invoice,fee)
 	fmt.Println(status)
+
+    client2 := nubit.NewClient(&types.PaymentParams{
+        Target:"127.0.0.1：:10009"
+		MacaroonFile:"/path/to/macaroon"
+    })
+    status2:=client.Payment(ctx,invoice,fee)
+    fmt.Println(status2)
 }
 
 ```

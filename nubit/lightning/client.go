@@ -9,7 +9,6 @@ import (
 	"io/ioutil"
 	"strconv"
 	"strings"
-	"time"
 
 	"github.com/lightningnetwork/lnd/lnrpc"
 	pb "github.com/lightningnetwork/lnd/lnrpc/routerrpc"
@@ -24,13 +23,9 @@ import (
 	"github.com/RiemaLabs/nubit-da-sdk/types"
 )
 
-func init() {
-	log.SetLevel(log.LevelDebug)
-	log.SetVerion("v0.1.0", time.Now().Format(time.DateOnly))
-}
-
 type Client struct {
-	c *grpc.ClientConn
+	c   *grpc.ClientConn
+	ctx context.Context
 }
 
 func NewClient(args *types.PaymentParams) *Client {
@@ -41,17 +36,20 @@ func NewClient(args *types.PaymentParams) *Client {
 	)
 	ctx := context.TODO()
 	creds = credentials.NewTLS(&tls.Config{})
+	var target = args.Target
 	switch true {
 	case args.XAPIKEY != "":
-		log.Info("lightning", "NewClient", "x-api-key", "Target", args.Target)
+		target = args.LndProxyTarget
+		log.Debug("lightning", "NewClient", "x-api-key", "Target", target)
 		ctx = metadata.AppendToOutgoingContext(ctx, "X-API-KEY", args.XAPIKEY)
 		opts = append(opts, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	case args.Authorization != "":
-		log.Info("lightning", "NewClient", "authorization", "Target", args.Target)
+		target = args.LndProxyTarget
+		log.Debug("lightning", "NewClient", "authorization", "Target", target)
 		ctx = metadata.AppendToOutgoingContext(ctx, "Authorization", args.Authorization)
 		opts = append(opts, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	case args.MacaroonFile != "":
-		log.Info("lightning", "NewClient", "MacaroonFile")
+		log.Debug("lightning", "NewClient", "MacaroonFile")
 		macaroonBytes, err := ioutil.ReadFile(args.MacaroonFile)
 		if err != nil {
 			log.Error("lightning", "ReadFile", err)
@@ -79,22 +77,23 @@ func NewClient(args *types.PaymentParams) *Client {
 		opts = append(opts, grpc.WithDefaultServiceConfig(`{"loadBalancingPolicy":"round_robin"}`), grpc.WithTransportCredentials(creds), grpc.WithPerRPCCredentials(credential))
 	}
 
-	_conn, err := grpc.DialContext(ctx, args.Target, opts...)
+	_conn, err := grpc.DialContext(ctx, target, opts...)
 	if err != nil {
-		log.Error("lightning", "Dial.err", err, "uri", args.Target)
+		log.Error("lightning", "Dial.err", err, "uri", target)
 		return nil
 	}
-	return &Client{_conn}
+	return &Client{_conn, ctx}
 }
 
 func (c *Client) Payment(ctx context.Context, invoice string, fee int64) (*types.PaymentStatus, error) {
-	ctx = metadata.AppendToOutgoingContext(ctx, "invoice", invoice)
+	nCtx := c.ctx
+	nCtx = metadata.AppendToOutgoingContext(nCtx, "invoice", invoice)
 	if c == nil || c.c == nil {
 		return nil, errors.New("lightning NewClient nil client")
 	}
 	defer c.c.Close()
 	r_client := pb.NewRouterClient(c.c)
-	stream, err := r_client.SendPaymentV2(ctx, &pb.SendPaymentRequest{
+	stream, err := r_client.SendPaymentV2(nCtx, &pb.SendPaymentRequest{
 		PaymentRequest: invoice,
 		TimeoutSeconds: 60,
 		FeeLimitSat:    fee,
