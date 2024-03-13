@@ -34,7 +34,7 @@ func main() {
 
 	fmt.Println("transaction:", transaction)
 
-	upload, err := client.Upload("/Users/{USER}/Documents/RiemaLabs/nubit-da-sdk/test/main.go", transaction.NID)
+	upload, err := client.Upload("/Users/{USER}/Documents/RiemaLabs/nubit-da-sdk/test/main.go", transaction.NID, 0)
 	if err != nil {
 		fmt.Println(err)
 		return

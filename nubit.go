@@ -102,7 +102,7 @@ func NewNubit(opts ...Opt) *NubitSDK {
 	return sdk
 }
 
-func (sdk *NubitSDK) Upload(filePath string, nid string) (target *types.DataUploadRsp, err error) {
+func (sdk *NubitSDK) Upload(filePath string, nid string, StorageFee uint64) (target *types.DataUploadRsp, err error) {
 	file, err := os.OpenFile(filePath, os.O_RDONLY, os.ModePerm)
 	if err != nil {
 		return nil, err
@@ -139,11 +139,16 @@ func (sdk *NubitSDK) Upload(filePath string, nid string) (target *types.DataUplo
 		Labels:     Labels,
 		MethodName: constant.DataUpload,
 	}
-	fee, err := sdk.Client.GetEstimateFee(sdk.Opts.ctx, data, utils.PrivateStrToEcdsa(sdk.Opts.privateKey), constant.DataUpload, nid)
-	if err != nil {
-		return nil, err
+	if StorageFee == 0 {
+		fee, err := sdk.Client.GetEstimateFee(sdk.Opts.ctx, data, utils.PrivateStrToEcdsa(sdk.Opts.privateKey), constant.DataUpload, nid)
+		if err != nil {
+			return nil, err
+		}
+		data.StorageFee = uint64(fee.StorageFee)
+	} else {
+		data.StorageFee = StorageFee
 	}
-	data.StorageFee = uint64(fee.StorageFee)
+
 	return sdk.Client.Upload(sdk.Opts.ctx, data, utils.PrivateStrToEcdsa(sdk.Opts.privateKey), sdk.Opts.PaymentParams)
 }
 
