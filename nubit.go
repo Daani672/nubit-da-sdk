@@ -28,6 +28,8 @@ type Option struct {
 	ctx           context.Context
 	PaymentParams *types.PaymentParams
 	privateKey    string
+	NubitRpc      string
+	ProxyRpc      string
 }
 type NubitSDK struct {
 	Client *client.Client
@@ -36,6 +38,13 @@ type NubitSDK struct {
 
 func SetNet(netstr string) {
 	constant.NubitNet = netstr
+}
+
+func WithRpc(rpc string) Opt {
+	return func(c *Option) {
+		c.NubitRpc = rpc
+		c.ProxyRpc = rpc
+	}
 }
 
 func WithPrivateKey(privateKey string) Opt {
@@ -95,6 +104,10 @@ func NewNubit(opts ...Opt) *NubitSDK {
 		op(sdk.Opts)
 	}
 	ctx = client.Background()
+	if sdk.Opts.NubitRpc != "" {
+		ctx.NubitRpc = sdk.Opts.NubitRpc
+		ctx.ProxyRpc = sdk.Opts.ProxyRpc
+	}
 	sdk.Client, err = client.Dial(ctx)
 	if err != nil {
 		return sdk
