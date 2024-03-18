@@ -27,6 +27,8 @@ const (
 	CountUsers             = "CountUsers"
 
 	GetNonce = "GetNonce"
+
+	GetDatas = "GetDatas"
 )
 
 var MocApi = map[string]string{
@@ -37,6 +39,7 @@ var MocApi = map[string]string{
 	GetDataByDAID:   "/v1/data/getDataByDAID",
 	GetDataIDByUser: "/v1/data/getDataByUser",
 	CountDatasize:   "/indexer/v1/countDatasize",
+	GetDatas:        "/indexer/v1/getDatas",
 	// block
 	GetBlockHeaderByNumber: "/v1/block/number",
 	GetLatestBlockNumber:   "/v1/block/latest",
@@ -75,6 +78,7 @@ var Release = map[string]string{
 	GetDataByDAID:   "/v1/data/getDataByDAID",
 	GetDataIDByUser: "/v1/data/getDataByUser",
 	CountDatasize:   "/indexer/v1/countDatasize",
+	GetDatas:        "/indexer/v1/getDatas",
 	// block
 	GetBlockHeaderByNumber: "/v1/block/number",
 	GetLatestBlockNumber:   "/v1/block/latest",

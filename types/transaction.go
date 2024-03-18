@@ -83,3 +83,24 @@ type GetTransactionsRsp struct {
 	} `json:"transactions,omitempty"`
 	LastOffset int `json:"lastOffset,omitempty"`
 }
+
+type GetDatasReq struct {
+	NID         []string `json:"namespaceID,omitempty"`
+	BlockNumber int64    `json:"blockNumber,omitempty"`
+}
+
+type GetDatasRsp struct {
+	Datas []*Datas `json:"datas,omitempty"`
+	Count int64    `json:"count,omitempty"`
+}
+
+type Datas struct {
+	BlockHash     string `json:"blockHash,omitempty"`
+	BlockNumber   uint64 `json:"blockNumber,omitempty"`
+	DAID          string `json:"dataID,omitempty"`
+	Datasize      int    `json:"datasize,omitempty"`
+	NID           string `json:"namespaceID,omitempty"`
+	TransactionID string `json:"transactionID,omitempty"`
+	Status        string `json:"status,omitempty"`
+	RawData       string `json:"data,omitempty"`
+}

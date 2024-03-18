@@ -110,3 +110,23 @@ func (c *Client) GetTxIDByDataID(ctx context.Context, req *types.GetTransactions
 	}
 	return data, err
 }
+
+func (c *Client) GetDatas(ctx context.Context, req *types.GetDatasReq) (data *types.GetDatasRsp, err error) {
+	path, err := url.JoinPath(c.c.Endpoint, c.u.GetUri(constant.GetDatas))
+	if err != nil {
+		log.Error("client.Transaction", "method", "indexer-GetDatas", "JoinPath", err)
+		return nil, err
+	}
+	post, err := c.c.Post(ctx, path, req, nil)
+	if err != nil {
+		log.Error("client.Transaction", "method", "indexer-GetDatas", "getDatas", err)
+		return nil, err
+	}
+
+	err = json.Unmarshal(post, &data)
+	if err != nil {
+		log.Error("client.Transaction", "method", "indexer-GetDatas", "Unmarshal", err)
+		return nil, err
+	}
+	return data, err
+}
