@@ -13,15 +13,15 @@ import (
 
 func main() {
 	ctx := context.Background()
-	sdk.SetNet(constant.MainNet)
+	sdk.SetNet(constant.TestNet)
 	client := sdk.NewNubit(sdk.WithCtx(ctx),
-		//sdk.WithRpc("http://middleware.nubit.xyz"),
+		sdk.WithRpc("https://test.api.nubit.network:444"),
 		sdk.WithInviteCode("7mkEPWPBBrMr12WKNsL2UALvqYfbox"),
-		sdk.WithPrivateKey("9541ea760acc451684d28033566379a95bfe5a1b4da4a56a7df6055e4fa93eac"))
+		sdk.WithPrivateKey("7ae9984540c0a3bb8d5a627010601d4529c276e526e08b136d1c24e5c72195df"))
 	if client == nil {
 		panic("client is nil")
 	}
-	ns, err := client.CreateNamespace("test", "Private", "1JqocHHUBgLKZxzQpCqrrzMnV6QV4XrUJr", []string{"18JTw53V9MMtGax7es3GMPQHwjpjNFyPj1", "1JqocHHUBgLKZxzQpCqrrzMnV6QV4XrUJr"})
+	ns, err := client.CreateNamespace("test", "Private", "mpVLaLbmMEeKL8snmQjaXVetUe73ugqRru", []string{"mpVLaLbmMEeKL8snmQjaXVetUe73ugqRru", "mnj48QUBZr8YvRXkgTCCCeRLRkq295LAoK"})
 	if err != nil {
 		panic(err)
 	}
@@ -46,8 +46,27 @@ func main() {
 
 	fmt.Println("\n upload:", upload)
 	time.Sleep(time.Second * 22)
+	namespaces, err := client.Client.GetNamespaces(ctx, &types.GetNamespacesReq{Limit: 50, Offset: 0, Filter: struct {
+		Owner string `json:"owner,omitempty"`
+		Admin string `json:"admin,omitempty"`
+	}{
+		Owner: "mpVLaLbmMEeKL8snmQjaXVetUe73ugqRru",
+	},
+	})
+	if err != nil {
+		return
+	}
+
+	var Nss []string
+	if len(namespaces.Namespaces) > 0 {
+		for _, ns := range namespaces.Namespaces {
+			fmt.Println("namespace:", ns.NamespaceID)
+			Nss = append(Nss, ns.NamespaceID)
+		}
+	}
+	fmt.Println("namespace:", Nss)
 	datas, err := client.Client.GetDatas(ctx, &types.GetDatasReq{
-		NID:         []string{"0x00000000", "0x00000001", "0x00000002", transaction.NID},
+		NID:         Nss,
 		BlockNumber: 0,
 	})
 	if err != nil {

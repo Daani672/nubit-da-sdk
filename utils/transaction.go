@@ -4,9 +4,8 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 
-	bitcoin "github.com/bitcoinschema/go-bitcoin/v2"
-
 	"github.com/RiemaLabs/nubit-da-sdk/log"
+	"github.com/bitcoinschema/go-bitcoin/v2"
 )
 
 func SignTransaction(privateKeyStr string, msg string) string {

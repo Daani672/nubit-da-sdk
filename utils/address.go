@@ -6,8 +6,12 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/RiemaLabs/nubit-da-sdk/constant"
 	bitcoin "github.com/bitcoinschema/go-bitcoin/v2"
+	"github.com/btcsuite/btcd/btcec/v2"
+	"github.com/btcsuite/btcd/btcutil"
 	"github.com/btcsuite/btcd/btcutil/hdkeychain"
+	"github.com/btcsuite/btcd/chaincfg"
 	"github.com/ethereum/go-ethereum/crypto"
 	"golang.org/x/crypto/sha3"
 )
@@ -23,23 +27,52 @@ func KeyTo0xAddress(key *hdkeychain.ExtendedKey) string {
 }
 
 func KeyToBtcAddress(key *hdkeychain.ExtendedKey) string {
-	privateKey, err := key.ECPrivKey()
-	if err != nil {
-		return ""
+	switch constant.NubitNet {
+	case constant.MainNet:
+		privateKey, err := key.ECPrivKey()
+		if err != nil {
+			return ""
+		}
+		btcaddr, err := bitcoin.GetAddressFromPrivateKeyString(EcdsaToPrivateStr(privateKey.ToECDSA()), false)
+		if err != nil {
+			return ""
+		}
+		return btcaddr
+	case constant.TestNet:
+		privateKey, err := key.ECPrivKey()
+		if err != nil {
+			return ""
+		}
+		_, pub := btcec.PrivKeyFromBytes(PrivateStrToByte(EcdsaToPrivateStr(privateKey.ToECDSA())))
+		publicKeyHash := btcutil.Hash160(pub.SerializeUncompressed())
+		p2pkhAddr, err := btcutil.NewAddressPubKeyHash(publicKeyHash, &chaincfg.TestNet3Params)
+		if err != nil {
+			return ""
+		}
+		return p2pkhAddr.EncodeAddress()
 	}
-	btcaddr, err := bitcoin.GetAddressFromPrivateKeyString(EcdsaToPrivateStr(privateKey.ToECDSA()), false)
-	if err != nil {
-		return ""
-	}
-	return btcaddr
+	return ""
 }
 
 func PrivateStrToBtcAddress(private string) string {
-	address, err := bitcoin.GetAddressFromPrivateKeyString(private, false)
-	if err != nil {
-		return ""
+	switch constant.NubitNet {
+	case constant.MainNet:
+		address, err := bitcoin.GetAddressFromPrivateKeyString(private, true)
+		if err != nil {
+			return ""
+		}
+
+		return address
+	case constant.TestNet:
+		_, pub := btcec.PrivKeyFromBytes(PrivateStrToByte(private))
+		publicKeyHash := btcutil.Hash160(pub.SerializeUncompressed())
+		p2pkhAddr, err := btcutil.NewAddressPubKeyHash(publicKeyHash, &chaincfg.TestNet3Params)
+		if err != nil {
+			return ""
+		}
+		return p2pkhAddr.EncodeAddress()
 	}
-	return address
+	return ""
 }
 
 func PrivateStrToEcdsa(private string) *ecdsa.PrivateKey {

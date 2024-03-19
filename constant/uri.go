@@ -25,6 +25,7 @@ const (
 	GetDataIDByUser        = "GetDataIDByUser"
 	GetNamespaceByUser     = "GetNamespaceByUser"
 	CountUsers             = "CountUsers"
+	GetNamespaces          = "GetNamespaces"
 
 	GetNonce = "GetNonce"
 
@@ -51,6 +52,7 @@ var MocApi = map[string]string{
 	GetNIDByTxID:       "/v1/chain/getNIDByTxID",
 	GetNamespaceByUser: "/v1/namespace/getNamespaceByUsers",
 	CountNamespace:     "/indexer/v1/countNamespace",
+	GetNamespaces:      "/indexer/v1/getNamespaces",
 
 	// Transaction
 	SubmitTransaction: "/v1/submitTransaction",
@@ -90,6 +92,7 @@ var Release = map[string]string{
 	GetNIDByTxID:       "/v1/chain/getNIDByTxID",
 	GetNamespaceByUser: "/v1/namespace/getNamespaceByUsers",
 	CountNamespace:     "/indexer/v1/countNamespace",
+	GetNamespaces:      "/indexer/v1/getNamespaces",
 
 	// Transaction
 	SubmitTransaction: "/v1/submitTransaction",

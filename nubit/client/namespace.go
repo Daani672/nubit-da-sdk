@@ -270,7 +270,7 @@ func (c *Client) TransferNamespace(ctx context.Context, req *types.TransferNames
 
 // GetNamespaces indexer-getNamespaces
 func (c *Client) GetNamespaces(ctx context.Context, req *types.GetNamespacesReq) (data *types.GetNamespacesRsp, err error) {
-	path, err := url.JoinPath(c.c.Endpoint, c.u.GetUri(constant.GetTransactions))
+	path, err := url.JoinPath(c.c.Endpoint, c.u.GetUri(constant.GetNamespaces))
 	if err != nil {
 		log.Error("client.Namespace", "method", "indexer-GetNamespaces", "JoinPath", err)
 		return nil, err
