@@ -115,6 +115,43 @@ func NewNubit(opts ...Opt) *NubitSDK {
 	return sdk
 }
 
+func (sdk *NubitSDK) UploadBytes(data []byte, nid string, StorageFee uint64, Labels map[string]interface{}) (target *types.DataUploadRsp, err error) {
+	if nid == "" {
+		nid = constant.DefaultNamespace
+	}
+	if Labels == nil {
+		return nil, errors.New("Labels must contain contentType")
+	}
+
+	for k, v := range Labels {
+		if !strings.EqualFold(k, "contentType") {
+			continue
+		}
+		if !utils.CheckContentType(v.(string)) {
+			return nil, fmt.Errorf("file type %s is not supported", v.(string))
+		}
+	}
+	btc := utils.PrivateStrToBtcAddress(sdk.Opts.privateKey)
+	req := &types.DataUploadReq{
+		NID:        nid,
+		From:       btc,
+		RawData:    base64.StdEncoding.EncodeToString(data),
+		Labels:     Labels,
+		MethodName: constant.DataUpload,
+	}
+	if StorageFee == 0 {
+		fee, err := sdk.Client.GetEstimateFee(sdk.Opts.ctx, req, utils.PrivateStrToEcdsa(sdk.Opts.privateKey), constant.DataUpload, nid)
+		if err != nil {
+			return nil, err
+		}
+		req.StorageFee = uint64(fee.StorageFee)
+	} else {
+		req.StorageFee = StorageFee
+	}
+
+	return sdk.Client.Upload(sdk.Opts.ctx, req, utils.PrivateStrToEcdsa(sdk.Opts.privateKey), sdk.Opts.PaymentParams)
+}
+
 func (sdk *NubitSDK) Upload(filePath string, nid string, StorageFee uint64) (target *types.DataUploadRsp, err error) {
 	file, err := os.OpenFile(filePath, os.O_RDONLY, os.ModePerm)
 	if err != nil {
