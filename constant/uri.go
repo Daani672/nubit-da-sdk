@@ -30,6 +30,8 @@ const (
 	GetNonce = "GetNonce"
 
 	GetDatas = "GetDatas"
+
+	GetTotalDataIDsInNamesapce = "GetTotalDataIDsInNamesapce"
 )
 
 var MocApi = map[string]string{
@@ -45,14 +47,15 @@ var MocApi = map[string]string{
 	GetBlockHeaderByNumber: "/v1/block/number",
 	GetLatestBlockNumber:   "/v1/block/latest",
 	// Namespace
-	GetNamespace:       "/v1/namespace",
-	GetNamespaceStatus: "/v1/namespace/status",
-	GetLastNamespaceID: "/v1/namespace/latest",
-	GetDataInNamespace: "/v1/namespace/data",
-	GetNIDByTxID:       "/v1/chain/getNIDByTxID",
-	GetNamespaceByUser: "/v1/namespace/getNamespaceByUsers",
-	CountNamespace:     "/indexer/v1/countNamespace",
-	GetNamespaces:      "/indexer/v1/getNamespaces",
+	GetNamespace:               "/v1/namespace",
+	GetNamespaceStatus:         "/v1/namespace/status",
+	GetLastNamespaceID:         "/v1/namespace/latest",
+	GetDataInNamespace:         "/v1/namespace/data",
+	GetNIDByTxID:               "/v1/chain/getNIDByTxID",
+	GetNamespaceByUser:         "/v1/namespace/getNamespaceByUsers",
+	CountNamespace:             "/indexer/v1/countNamespace",
+	GetNamespaces:              "/indexer/v1/getNamespaces",
+	GetTotalDataIDsInNamesapce: "/v1/namespace/data/total",
 
 	// Transaction
 	SubmitTransaction: "/v1/submitTransaction",
@@ -85,14 +88,15 @@ var Release = map[string]string{
 	GetBlockHeaderByNumber: "/v1/block/number",
 	GetLatestBlockNumber:   "/v1/block/latest",
 	// Namespace
-	GetNamespace:       "/v1/namespace",
-	GetNamespaceStatus: "/v1/namespace/status",
-	GetLastNamespaceID: "/v1/namespace/latest",
-	GetDataInNamespace: "/v1/namespace/data",
-	GetNIDByTxID:       "/v1/chain/getNIDByTxID",
-	GetNamespaceByUser: "/v1/namespace/getNamespaceByUsers",
-	CountNamespace:     "/indexer/v1/countNamespace",
-	GetNamespaces:      "/indexer/v1/getNamespaces",
+	GetNamespace:               "/v1/namespace",
+	GetNamespaceStatus:         "/v1/namespace/status",
+	GetLastNamespaceID:         "/v1/namespace/latest",
+	GetDataInNamespace:         "/v1/namespace/data",
+	GetNIDByTxID:               "/v1/chain/getNIDByTxID",
+	GetNamespaceByUser:         "/v1/namespace/getNamespaceByUsers",
+	CountNamespace:             "/indexer/v1/countNamespace",
+	GetNamespaces:              "/indexer/v1/getNamespaces",
+	GetTotalDataIDsInNamesapce: "/v1/namespace/data/total",
 
 	// Transaction
 	SubmitTransaction: "/v1/submitTransaction",

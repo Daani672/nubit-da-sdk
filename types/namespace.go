@@ -142,3 +142,11 @@ type GetNamespacesRsp struct {
 }
 
 // /indexer/v1/countNamespace
+
+type GetTotalDataIDsInNamesapceReq struct {
+	NID string `json:"namespaceID"`
+}
+
+type GetTotalDataIDsInNamesapceRsp struct {
+	Count int64 `json:"count"`
+}

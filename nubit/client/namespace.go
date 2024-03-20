@@ -137,6 +137,29 @@ func (c *Client) GetDataInNamespace(ctx context.Context, req *types.GetDataInNam
 	return data, err
 }
 
+func (c *Client) GetTotalDataIDsInNamesapce(ctx context.Context, req *types.GetTotalDataIDsInNamesapceReq) (data *types.GetTotalDataIDsInNamesapceRsp, err error) {
+	path, err := url.JoinPath(c.c.Endpoint, c.u.GetUri(constant.GetTotalDataIDsInNamesapce))
+	if err != nil {
+		log.Error("client.Namespace", "method", "GetTotalDataIDsInNamesapce", "JoinPath", err)
+		return nil, err
+	}
+	post, err := c.c.Post(ctx, path, req, nil)
+	if err != nil {
+		log.Error("client.Namespace", "method", "GetTotalDataIDsInNamesapce", "getDataInNamespace", err)
+		return nil, err
+	}
+
+	if post == nil || len(post) == 0 {
+		return &types.GetTotalDataIDsInNamesapceRsp{}, nil
+	}
+	err = json.Unmarshal(post, &data)
+	if err != nil {
+		log.Error("client.Namespace", "method", "GetTotalDataIDsInNamesapce", "Unmarshal", err)
+		return nil, err
+	}
+	return data, err
+}
+
 func (c *Client) CreateNamespace(ctx context.Context, req *types.CreateNameSpaceReq, privateKey *ecdsa.PrivateKey, payParams *types.PaymentParams) (data *types.DataUploadRsp, err error) {
 	fee, err := c.GetEstimateFee(ctx, req, privateKey, req.MethodName, "")
 	if err != nil {
