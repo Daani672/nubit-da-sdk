@@ -2,6 +2,22 @@
 
 <img src="assets/logo.svg" width="600px" alt="Nubit Logo" />
 
+## Background
+`nubit-da-sdk` offers developers the tools and library support needed to interact with the Nubit Decentralized Autonomous (DA) Chain. It encapsulates a variety of functionalities, from wallet creation to namespace operations, making blockchain operations seamless and efficient.
+
+## What is Nubit-da-sdk?
+The `nubit-da-sdk` is a comprehensive Golang SDK designed for ease of use when working with the Nubit DA Chain. It abstracts complex blockchain interactions into simple API calls, enabling rapid development and integration with the Nubit ecosystem.
+
+## Getting Started
+To use `nubit-da-sdk`, you will need Golang installed on your system. You can run your own modular Indexer by following the procedure below. `Go` version `1.22.0` is required for running repository. Please visit [Golang download Page](https://go.dev/doc/install) to get latest Golang installed.
+
+### 1. Install Dependencies
+Dependencies are managed through Go Modules. To install all required dependencies, navigate to your project directory and run:
+
+```Bash
+go mod tidy
+```
+
 ## Usage
 ```go
 package main
