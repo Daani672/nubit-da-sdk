@@ -3,10 +3,13 @@
 <img src="assets/logo.svg" width="600px" alt="Nubit Logo" />
 
 ## Background
-`nubit-da-sdk` offers developers the tools and library support needed to interact with the Nubit Decentralized Autonomous (DA) Chain. It encapsulates a variety of functionalities, from wallet creation to namespace operations, making blockchain operations seamless and efficient.
+`nubit-da-sdk` equips developers with the necessary tools and libraries to efficiently interact with the Nubit Data Availability (DA) Chain. It streamlines complex blockchain functionalities into easy-to-use operations.
 
 ## What is Nubit-da-sdk?
-The `nubit-da-sdk` is a comprehensive Golang SDK designed for ease of use when working with the Nubit DA Chain. It abstracts complex blockchain interactions into simple API calls, enabling rapid development and integration with the Nubit ecosystem.
+`nubit-da-sdk` is an all-encompassing Golang SDK for the Nubit Data Availability (DA)  Chain. It simplifies the complex processes of blockchain interactions into user-friendly API calls. 
+The SDK covers a broad range of blockchain functionalities, from generating wallets to managing data in namespaces. It's designed to streamline blockchain operations for developers, fostering easy development and integration within the Nubit ecosystem. 
+This SDK is essential for anyone looking to build applications on the Nubit platform, providing a robust set of tools to efficiently handle various blockchain-related tasks.
+
 
 ## Getting Started
 To use `nubit-da-sdk`, you will need Golang installed on your system. You can run your own modular Indexer by following the procedure below. `Go` version `1.22.0` is required for running repository. Please visit [Golang download Page](https://go.dev/doc/install) to get latest Golang installed.
@@ -34,6 +37,7 @@ if client == nil {
     panic("client is nil") // Panic if the client creation fails
 }
 ```
+Expected Outcome: This script initializes your SDK client. If successful, you'll see "SDK client successfully initialized".
 
 ### 3. Create a Namespace
 Namespaces are essential in nubit-da-sdk for organizing your data. Here's how to create one:
@@ -49,6 +53,7 @@ if err != nil {
 }
 fmt.Println("Created namespace:", ns)
 ```
+Expected Outcome: The script creates a new namespace and returns its ID if successful.
 
 ### 4. Upload Data to Namespace
 Once you have a namespace, you can start uploading data to it:
@@ -65,5 +70,24 @@ if err != nil {
 }
 fmt.Println("Uploaded data:", upload)
 ```
+Expected Outcome: The script uploads a file to the specified namespace and provides a transaction ID upon successful upload.
 
-git
+
+## FAQ
+- **Q: How do I integrate nubit-da-sdk into my project?**
+    - A: Start by ensuring your system has Golang installed. Follow our "Getting Started" guide to integrate nubit-da-sdk into your project. This involves installing dependencies, initializing the SDK, setting up network preferences, and creating namespaces for data organization.
+
+- **Q: How does nubit-da-sdk ensure data security and privacy?**
+    - A: nubit-da-sdk employs encryption techniques and offers both public and private namespaces for data handling. Users can choose the appropriate privacy settings for their data, managed securely with private keys.
+
+- **Q: Where can I get help if I encounter issues with nubit-da-sdk?**
+    - A: First, ensure you're following the documentation correctly. If the issue persists, seek help through our community forums, GitHub issues, or contact our technical support. We're here to assist with any SDK-related queries or difficulties.
+
+- **Q: How does nubit-da-sdk handle large-scale data uploads and storage?**
+    - A: nubit-da-sdk supports efficient data uploading and storage management. You can upload and manage data in the created namespaces, with the storage fees calculated automatically or specified manually based on your needs.
+
+- **Q: Can I use nubit-da-sdk for Lightning Network payments?**
+    - A: Yes, nubit-da-sdk supports Lightning Network transactions, enabling fast and efficient micropayments on the blockchain. You can integrate Lightning payment functionalities into your application using the SDK, providing a seamless user experience for transactions.
+
+- **Q: What kind of blockchain operations can I perform with nubit-da-sdk?**
+    - A: The SDK is designed for a wide range of blockchain operations, including creating and managing wallets, executing and tracking transactions, managing namespaces for organizing data, and interacting with the Nubit blockchain for various decentralized applications (dApps).
