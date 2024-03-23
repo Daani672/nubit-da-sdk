@@ -14,60 +14,56 @@ To use `nubit-da-sdk`, you will need Golang installed on your system. You can ru
 ### 1. Install Dependencies
 Dependencies are managed through Go Modules. To install all required dependencies, navigate to your project directory and run:
 
-```Bash
+```go
 go mod tidy
 ```
 
-## Usage
+### 2. Initialize SDK
+To start using the `nubit-da-sdk`, create a new instance and set it up with your network preferences, invitation code, and private key:
+
 ```go
-package main
-
-import (
-	"context"
-	"fmt"
-
-	sdk "github.com/RiemaLabs/nubit-da-sdk"
-	"github.com/RiemaLabs/nubit-da-sdk/constant"
-	"github.com/RiemaLabs/nubit-da-sdk/types"
-)
-
-func main() {
-	// Initialize context and SDK settings
-	ctx := context.Background()
-	// Set network to mainnet
-	sdk.SetNet(constant.MainNet)
-	client := sdk.NewNubit(sdk.WithCtx(ctx),
-		sdk.WithInviteCode("7mkEPWPBBrMr12WKNsL2UALvqYfbox"),// Set invite code
-		sdk.WithPrivateKey("9541ea760acc451684d28033566379a95bfe5a1b4da4a56a7df6055e4fa93eac")) // Set private key
-	if client == nil {
-		panic("client is nil") // Panic if the client creation fails
-	}
-	// Create a namespace
-	ns, err := client.CreateNamespace("test", "Private", "1JqocHHUBgLKZxzQpCqrrzMnV6QV4XrUJr", []string{"18JTw53V9MMtGax7es3GMPQHwjpjNFyPj1", "1JqocHHUBgLKZxzQpCqrrzMnV6QV4XrUJr"})
-	if err != nil {
-		panic(err) // Print created namespace information
-	}
-	fmt.Println("namespace:", ns)
-	// Query transaction details
-	transaction, err := client.Client.GetTransaction(ctx, &types.GetTransactionReq{
-		TxID: ns.TxID, // Query transaction info by namespace's transaction ID
-	})
-	if err != nil {
-		fmt.Println(err)// Print error message if query fails
-		return
-	}
-
-	fmt.Println("transaction:", transaction)
-	// Upload file
-	upload, err := client.Upload("/Users/{USER}/Documents/RiemaLabs/nubit-da-sdk/test/main.go", transaction.NID,0) // If the fee is 0, it will be obtained automatically, but of course it can also be obtained through the client. GetEstimateFee, 0 is recommended
-	if err != nil {
-		fmt.Println(err)// Print error message if file upload fails
-		return
-	}
-	// Print upload result
-	fmt.Println("upload:", upload)
-
+// Initialize context and SDK settings
+ctx := context.Background()
+// Set network to mainnet
+sdk.SetNet(constant.MainNet)
+// Replace "your_invite_code" and "your_private_key" with actual values
+client := sdk.NewNubit(sdk.WithCtx(ctx),
+    sdk.WithInviteCode("your_invite_code"),
+    sdk.WithPrivateKey("your_private_key"))
+if client == nil {
+    panic("client is nil") // Panic if the client creation fails
 }
-
-
 ```
+
+### 3. Create a Namespace
+Namespaces are essential in nubit-da-sdk for organizing your data. Here's how to create one:
+
+```go
+// Replace "namespace_name" and "PrivacySetting" with actual values
+// "PrivacySetting" should be either "Public" or "Private"
+// "owners_address" should be the wallet address of the namespace owner
+// "additional_admins" can be an array of addresses who can administer the namespace
+ns, err := client.CreateNamespace("namespace_name", "PrivacySetting", "owners_address", []string{"additional_admins"})
+if err != nil {
+    panic(err) // Handle the error appropriately
+}
+fmt.Println("Created namespace:", ns)
+```
+
+### 4. Upload Data to Namespace
+Once you have a namespace, you can start uploading data to it:
+```go
+// The path to the file you wish to upload
+filePath := "/path/to/your/file"
+// The namespace ID where you wish to upload the file
+namespaceID := ns.ID
+// Replace "0" with the storage fee if you wish to specify it
+// Using "0" will automatically calculate the necessary fee
+upload, err := client.Upload(filePath, namespaceID, 0)
+if err != nil {
+    panic(err) // Handle the error appropriately
+}
+fmt.Println("Uploaded data:", upload)
+```
+
+git
