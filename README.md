@@ -1,4 +1,8 @@
 # nubit-da-sdk
+[![Join Nubit Discord Community](https://img.shields.io/discord/916984413944967180?logo=discord&style=flat)](您的Discord链接)
+[![Follow Nubit On Twitter](https://img.shields.io/twitter/follow/nubit_org?style=social)](您的Twitter链接)
+
+![Nubit Logo](assets/logo.svg)
 
 ## Usage
 ```go
