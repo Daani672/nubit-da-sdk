@@ -31,7 +31,7 @@ ctx := context.Background()
 sdk.SetNet(constant.MainNet)
 // Replace "your_invite_code" and "your_private_key" with actual values
 client := sdk.NewNubit(sdk.WithCtx(ctx),
-    sdk.WithInviteCode("your_invite_code"),
+    sdk.WithGasCode("your_gas_code"),
     sdk.WithPrivateKey("your_private_key"))
 if client == nil {
     panic("client is nil") // Panic if the client creation fails
