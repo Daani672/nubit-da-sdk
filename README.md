@@ -66,7 +66,7 @@ Once you have a namespace, you can start publishing data to it:
 filePath := "/path/to/your/file"
 // The namespace ID where you wish to publish the data
 namespaceID := ns.ID
-// Replace "0" with the storage fee if you wish to specify it
+// Replace "0" with the transaction fee if you wish to specify it
 // Using "0" will automatically calculate the necessary fee
 publish, err := client.Upload(filePath, namespaceID, 0)
 if err != nil {
