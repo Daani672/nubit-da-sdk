@@ -12,7 +12,7 @@ This SDK is essential for anyone looking to build applications on the Nubit plat
 
 
 ## Getting Started
-To use `nubit-da-sdk`, you will need Golang installed on your system. You can run your own modular Indexer by following the procedure below. `Go` version `1.22.0` is required for running repository. Please visit [Golang download Page](https://go.dev/doc/install) to get latest Golang installed.
+TTo use `nubit-da-sdk`, you will need Golang installed on your system. Follow the steps below to set up and start using the SDK. `Go` version `1.22.0` or later is required for running repository. Please visit [Golang download Page](https://go.dev/doc/install) to get latest Golang installed.
 
 ### 1. Install Dependencies
 Dependencies are managed through Go Modules. To install all required dependencies, navigate to your project directory and run:
