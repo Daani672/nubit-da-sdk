@@ -40,7 +40,7 @@ if client == nil {
     panic("client is nil") // Panic if the client creation fails
 }
 ```
-Expected Outcome: This script initializes your SDK client. If successful, you'll see "SDK client successfully initialized". Remember to switch the network settings and invitation code as per your requirements.
+Expected Outcome: This script initializes your SDK client. If successful, you'll see "SDK client successfully initialized". 
 
 ### 3. Create a Namespace
 Namespaces are essential in nubit-da-sdk for organizing your data. Here's how to create one:
