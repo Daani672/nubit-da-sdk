@@ -68,13 +68,13 @@ filePath := "/path/to/your/file"
 namespaceID := ns.ID
 // Replace "0" with the storage fee if you wish to specify it
 // Using "0" will automatically calculate the necessary fee
-upload, err := client.Upload(filePath, namespaceID, 0)
+publish, err := client.Upload(filePath, namespaceID, 0)
 if err != nil {
     panic(err) // Handle the error appropriately
 }
-fmt.Println("Uploaded data:", upload)
+fmt.Println("Uploaded data:", publish)
 ```
-Expected Outcome: The script publishes data from a file to the specified namespace and returns a transaction ID upon successful upload.
+Expected Outcome: The script publishes a file to the specified namespace and provides a transaction ID upon successful publish.
 
 
 ## FAQ
