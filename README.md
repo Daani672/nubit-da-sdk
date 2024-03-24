@@ -25,16 +25,16 @@ go mod tidy
 ```
 
 ### 2. Initialize SDK
-To start using the `nubit-da-sdk`, create a new instance and set it up with your network preferences, invitation code, and private key. You have the option to use the Lightning Network for transaction fee payments, or an invite code (limited to pre-alpha testnet):
+To start using the `nubit-da-sdk`, create a new instance and set it up with your network preferences and private key. You have the option to use the Lightning Network for transaction fee payments, or a gas code (limited to pre-alpha testnet):
 
 ```go
 // Initialize context and SDK settings
 ctx := context.Background()
 // Set network to mainnet
 sdk.SetNet(constant.MainNet)
-// Replace "your_invite_code" and "your_private_key" with actual values
+// Replace "your_gas_code" and "your_private_key" with actual values
 client := sdk.NewNubit(sdk.WithCtx(ctx),
-    sdk.WithInviteCode("your_invite_code"),
+    sdk.WithGasCode("your_gas_code"),
     sdk.WithPrivateKey("your_private_key"))
 if client == nil {
     panic("client is nil") // Panic if the client creation fails
