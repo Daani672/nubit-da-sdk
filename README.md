@@ -2,8 +2,7 @@
 
 <img src="assets/logo.svg" width="600px" alt="Nubit Logo" />
 
-**Warning!**
-This release is specifically for the Pre-alpha Testnet and may include changes that are not backward compatible in the future.
+***Warning!*** *This release is specifically for the Pre-alpha Testnet and may include changes that are not backward compatible in the future.*
 
 ## Background
 `nubit-da-sdk` equips developers with the necessary tools and libraries to efficiently interact with the Nubit Data Availability (DA) Chain. It streamlines complex blockchain functionalities into easy-to-use operations.
@@ -66,7 +65,7 @@ Once you have a namespace, you can start publishing data to it:
 filePath := "/path/to/your/file"
 // The namespace ID where you wish to publish the data
 namespaceID := ns.ID
-// Replace "0" with the storage fee if you wish to specify it
+// Replace "0" with the transaction fee if you wish to specify it
 // Using "0" will automatically calculate the necessary fee
 publish, err := client.Upload(filePath, namespaceID, 0)
 if err != nil {
