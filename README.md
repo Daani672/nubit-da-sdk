@@ -2,6 +2,9 @@
 
 <img src="assets/logo.svg" width="600px" alt="Nubit Logo" />
 
+**Warning!**
+This release is specifically for the Pre-alpha Testnet and may include changes that are not backward compatible in the future.
+
 ## Background
 `nubit-da-sdk` equips developers with the necessary tools and libraries to efficiently interact with the Nubit Data Availability (DA) Chain. It streamlines complex blockchain functionalities into easy-to-use operations.
 
@@ -22,14 +25,14 @@ go mod tidy
 ```
 
 ### 2. Initialize SDK
-To start using the `nubit-da-sdk`, create a new instance and set it up with your network preferences, invitation code, and private key:
+To start using the `nubit-da-sdk`, create a new instance and set it up with your network preferences and private key. You have the option to use the Lightning Network for transaction fee payments, or a gas code (limited to pre-alpha testnet):
 
 ```go
 // Initialize context and SDK settings
 ctx := context.Background()
 // Set network to mainnet
 sdk.SetNet(constant.MainNet)
-// Replace "your_invite_code" and "your_private_key" with actual values
+// Replace "your_gas_code" and "your_private_key" with actual values
 client := sdk.NewNubit(sdk.WithCtx(ctx),
     sdk.WithGasCode("your_gas_code"),
     sdk.WithPrivateKey("your_private_key"))
@@ -37,6 +40,7 @@ if client == nil {
     panic("client is nil") // Panic if the client creation fails
 }
 ```
+
 Expected Outcome: This script initializes your SDK client. If successful, it returns "SDK client successfully initialized".
 
 ### 3. Create a Namespace
@@ -78,7 +82,13 @@ Expected Outcome: The script publishes data from a file to the specified namespa
     - A: Start by ensuring your system has Golang installed. Follow our "Getting Started" guide to integrate nubit-da-sdk into your project. This involves installing dependencies, initializing the SDK, setting up network preferences, and creating namespaces for data organization.
 
 - **Q: Where can I get help if I encounter issues with nubit-da-sdk?**
-    - A: First, ensure you're following the documentation correctly. If the issue persists, seek help through our discord, GitHub issues, or contact our technical support. We're here to assist with any SDK-related queries or difficulties.
+    - A: First, ensure you're following the documentation correctly. If the issue persists, seek help through our community forums, GitHub issues, or contact our technical support. We're here to assist with any SDK-related queries or difficulties.
+
+- **Q: What is nubit-da-sdk's approach to data availability and large-scale data publishing?**
+    - A: nubit-da-sdk prioritizes data availability using Data Availability Sampling (DAS), facilitating efficient data publishing within namespaces. It ensures data is accessible for a specific period, focusing on availability rather than long-term storage. Transaction fees for data operations are either auto-calculated or can be manually set.
+
+- **Q: Can I use nubit-da-sdk for Lightning Network payments?**
+    - A: Yes, nubit-da-sdk supports Lightning Network transactions, enabling fast and efficient micropayments on the blockchain. You can integrate Lightning payment functionalities into your application using the SDK, providing a seamless user experience for transactions.
 
 - **Q: What kind of blockchain operations can I perform with nubit-da-sdk?**
     - A: The SDK is designed for a wide range of blockchain operations, including creating and managing wallets, executing and tracking transactions, and managing namespaces for organizing data.
