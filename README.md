@@ -2,6 +2,9 @@
 
 <img src="assets/logo.svg" width="600px" alt="Nubit Logo" />
 
+**Warning**
+This release is specifically for the Pre-alpha Testnet and may include changes that are not backward compatible in the future.
+
 ## Background
 `nubit-da-sdk` equips developers with the necessary tools and libraries to efficiently interact with the Nubit Data Availability (DA) Chain. It streamlines complex blockchain functionalities into easy-to-use operations.
 
@@ -76,9 +79,6 @@ Expected Outcome: The script uploads a file to the specified namespace and provi
 ## FAQ
 - **Q: How do I integrate nubit-da-sdk into my project?**
     - A: Start by ensuring your system has Golang installed. Follow our "Getting Started" guide to integrate nubit-da-sdk into your project. This involves installing dependencies, initializing the SDK, setting up network preferences, and creating namespaces for data organization.
-
-- **Q: How does nubit-da-sdk ensure data security and privacy?**
-    - A: nubit-da-sdk employs encryption techniques and offers both public and private namespaces for data handling. Users can choose the appropriate privacy settings for their data, managed securely with private keys.
 
 - **Q: Where can I get help if I encounter issues with nubit-da-sdk?**
     - A: First, ensure you're following the documentation correctly. If the issue persists, seek help through our community forums, GitHub issues, or contact our technical support. We're here to assist with any SDK-related queries or difficulties.
