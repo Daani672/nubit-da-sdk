@@ -22,16 +22,16 @@ go mod tidy
 ```
 
 ### 2. Initialize SDK
-To start using the `nubit-da-sdk`, create a new instance and set it up with your network preferences, invitation code, and private key:
+To start using the `nubit-da-sdk`, create a new instance and set it up with your network preferences, gas code, and private key:
 
 ```go
 // Initialize context and SDK settings
 ctx := context.Background()
 // Set network to mainnet
 sdk.SetNet(constant.MainNet)
-// Replace "your_invite_code" and "your_private_key" with actual values
+// Replace "your_gas_code" and "your_private_key" with actual values
 client := sdk.NewNubit(sdk.WithCtx(ctx),
-    sdk.WithInviteCode("your_invite_code"),
+    sdk.WithGasCode("your_gas_code"),
     sdk.WithPrivateKey("your_private_key"))
 if client == nil {
     panic("client is nil") // Panic if the client creation fails
@@ -55,14 +55,14 @@ fmt.Println("Created namespace:", ns)
 ```
 Expected Outcome: The script creates a new namespace and returns its ID if successful.
 
-### 4. Upload Data to Namespace
-Once you have a namespace, you can start uploading data to it:
+### 4. Publish Data to Namespace
+Once you have a namespace, you can start publishing data to it:
 ```go
-// The path to the file you wish to upload
+// The path to the file you wish to publish
 filePath := "/path/to/your/file"
-// The namespace ID where you wish to upload the file
+// The namespace ID where you wish to publish the file
 namespaceID := ns.ID
-// Replace "0" with the storage fee if you wish to specify it
+// Replace "0" with the transaction fee if you wish to specify it
 // Using "0" will automatically calculate the necessary fee
 upload, err := client.Upload(filePath, namespaceID, 0)
 if err != nil {
@@ -70,7 +70,7 @@ if err != nil {
 }
 fmt.Println("Uploaded data:", upload)
 ```
-Expected Outcome: The script uploads a file to the specified namespace and provides a transaction ID upon successful upload.
+Expected Outcome: The script published a file to the specified namespace and provides a transaction ID upon successful publish.
 
 
 ## FAQ
