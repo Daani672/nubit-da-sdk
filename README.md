@@ -2,7 +2,7 @@
 
 <img src="assets/logo.svg" width="600px" alt="Nubit Logo" />
 
-**Warning**
+**Warning!**
 This release is specifically for the Pre-alpha Testnet and may include changes that are not backward compatible in the future.
 
 ## Background
@@ -25,7 +25,7 @@ go mod tidy
 ```
 
 ### 2. Initialize SDK
-To start using the `nubit-da-sdk`, create a new instance and set it up with your network preferences, invitation code, and private key:
+To start using the `nubit-da-sdk`, create a new instance and set it up with your network preferences, invitation code, and private key. You have the option to use the Lightning Network for transaction fee payments, or an invite code (limited to pre-alpha testnet):
 
 ```go
 // Initialize context and SDK settings
@@ -40,7 +40,7 @@ if client == nil {
     panic("client is nil") // Panic if the client creation fails
 }
 ```
-Expected Outcome: This script initializes your SDK client. If successful, you'll see "SDK client successfully initialized".
+Expected Outcome: This script initializes your SDK client. If successful, you'll see "SDK client successfully initialized". Remember to switch the network settings and invitation code as per your requirements.
 
 ### 3. Create a Namespace
 Namespaces are essential in nubit-da-sdk for organizing your data. Here's how to create one:
@@ -83,8 +83,8 @@ Expected Outcome: The script uploads a file to the specified namespace and provi
 - **Q: Where can I get help if I encounter issues with nubit-da-sdk?**
     - A: First, ensure you're following the documentation correctly. If the issue persists, seek help through our community forums, GitHub issues, or contact our technical support. We're here to assist with any SDK-related queries or difficulties.
 
-- **Q: How does nubit-da-sdk handle large-scale data uploads and storage?**
-    - A: nubit-da-sdk supports efficient data uploading and storage management. You can upload and manage data in the created namespaces, with the storage fees calculated automatically or specified manually based on your needs.
+- **Q: What is nubit-da-sdk's approach to data availability and large-scale data publishing?**
+    - A: nubit-da-sdk prioritizes data availability using Data Availability Sampling (DAS), facilitating efficient data publishing within namespaces. It ensures data is accessible for a specific period, focusing on availability rather than long-term storage. Transaction fees for data operations are either auto-calculated or can be manually set.
 
 - **Q: Can I use nubit-da-sdk for Lightning Network payments?**
     - A: Yes, nubit-da-sdk supports Lightning Network transactions, enabling fast and efficient micropayments on the blockchain. You can integrate Lightning payment functionalities into your application using the SDK, providing a seamless user experience for transactions.
