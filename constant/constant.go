@@ -18,9 +18,9 @@ var NubitRpc = "https://pre-alpha.indexer.nubit.org"
 
 var ProxyRpc = "https://pre-alpha.indexer.nubit.org"
 
-var NubitTestRpc = "https://test.api.nubit.network"
+var NubitTestRpc = "https://test.indexer.nubit.network"
 
-var ProxyTestRpc = "https://test.api.nubit.network"
+var ProxyTestRpc = "https://test.indexer.nubit.network"
 
 var NubitLndProxy = "pre-alpha.lnd.nubit.org:50051"
 
