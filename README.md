@@ -30,8 +30,8 @@ To start using the `nubit-da-sdk`, create a new instance and set it up with your
 ```go
 // Initialize context and SDK settings
 ctx := context.Background()
-// Set network to mainnet
-sdk.SetNet(constant.MainNet)
+// Set network to pre-alpha testnet
+sdk.SetNet(constant.PreAlphaTestNet)
 // Replace "your_gas_code" and "your_private_key" with actual values
 client := sdk.NewNubit(sdk.WithCtx(ctx),
     sdk.WithGasCode("your_gas_code"),
