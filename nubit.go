@@ -65,7 +65,7 @@ func WithCtx(ctx context.Context) Opt {
 	}
 }
 
-func WithInviteCode(code string) Opt {
+func WithGasCode(code string) Opt {
 	return func(c *Option) {
 		c.PaymentParams.XAPIKEY = code
 		c.PaymentParams.LndProxyTarget = constant.NubitLndProxy

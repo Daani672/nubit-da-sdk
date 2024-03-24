@@ -16,7 +16,7 @@ func main() {
 	sdk.SetNet(constant.PreAlphaTestNet)
 	client := sdk.NewNubit(sdk.WithCtx(ctx),
 		sdk.WithRpc("{rpc}"),
-		sdk.WithInviteCode("{InviteCode}"),
+		sdk.WithGasCode("{GasCode}"),
 		sdk.WithPrivateKey("{PrivateKey}"))
 	if client == nil {
 		panic("client is nil")
