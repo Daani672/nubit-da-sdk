@@ -54,7 +54,20 @@ ns, err := client.CreateNamespace("namespace_name", "PrivacySetting", "owners_ad
 if err != nil {
     panic(err) // Handle the error appropriately
 }
-fmt.Println("Created namespace:", ns)
+
+// Wait for the new block.
+time.Sleep(time.Second * 25)
+
+tx, err := client.Client.GetTransaction(ctx, &types.GetTransactionReq {
+    TxID: ns.TxID,
+})
+
+if err != nil {
+    panic(err) // Handle the error appropriately
+}
+
+fmt.Printf("Created Namespace: %s", tx.NID)
+
 ```
 Expected Outcome: The script creates a new namespace and returns its ID if successful.
 
@@ -64,7 +77,7 @@ Once you have a namespace, you can start publishing data to it:
 // The path to the file you wish to publish
 filePath := "/path/to/your/file"
 // The namespace ID where you wish to publish the data
-namespaceID := ns.ID
+namespaceID := "0x00000001"
 // Replace "0" with the transaction fee if you wish to specify it
 // Using "0" will automatically calculate the necessary fee
 publish, err := client.Upload(filePath, namespaceID, 0)
