@@ -2,8 +2,7 @@
 
 <img src="assets/logo.svg" width="600px" alt="Nubit Logo" />
 
-**Warning!**
-This release is specifically for the Pre-alpha Testnet and may include changes that are not backward compatible in the future.
+***Warning!*** *This release is specifically for the Pre-alpha Testnet and may include changes that are not backward compatible in the future.*
 
 ## Background
 `nubit-da-sdk` equips developers with the necessary tools and libraries to efficiently interact with the Nubit Data Availability (DA) Chain. It streamlines complex blockchain functionalities into easy-to-use operations.
