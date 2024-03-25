@@ -48,7 +48,7 @@ Namespaces are essential in nubit-da-sdk for organizing your data. Here's how to
 ```go
 // Replace "namespace_name" and "PrivacySetting" with actual values
 // "PrivacySetting" should be either "Public" or "Private"
-// "owners_address" should be the wallet address of the namespace owner
+// "owners_address" should be the wallet address of the namespace owner, it could be empty to set the sender as the owner.
 // "additional_admins" can be an array of addresses who can administer the namespace
 ns, err := client.CreateNamespace("namespace_name", "PrivacySetting", "owners_address", []string{"additional_admins"})
 if err != nil {

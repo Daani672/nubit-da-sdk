@@ -222,6 +222,9 @@ func (sdk *NubitSDK) CreateNamespace(name, permission, owner string, admins []st
 	if len(admins) == 0 {
 		admins = append(admins, btc)
 	}
+	if !(permission == "Public" || permission == "Private") {
+		return nil, errors.New("the permission should be either 'Public' or 'Private'")
+	}
 	return sdk.Client.CreateNamespace(sdk.Opts.ctx, &types.CreateNameSpaceReq{
 		From:            btc,
 		Name:            name,
