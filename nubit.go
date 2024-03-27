@@ -18,14 +18,14 @@ import (
 )
 
 func init() {
-	log.SetLevel(log.LevelDebug)
+	log.SetLevel(log.LevelOff)
 	bi, ok := debug.ReadBuildInfo()
 	if !ok {
 		log.Error("Failed to obtain build information.")
 	}
 	Version := bi.Main.Version
 	log.SetVerion(Version, constant.APPBuild)
-	constant.NubitNet = constant.TestNet
+	constant.NubitNet = constant.PreAlphaTestNet
 }
 
 type Opt func(c *Option)
