@@ -15,13 +15,13 @@ func main() {
 	ctx := context.Background()
 	sdk.SetNet(constant.PreAlphaTestNet)
 	client := sdk.NewNubit(sdk.WithCtx(ctx),
-		sdk.WithRpc("{rpc}"),
-		sdk.WithGasCode("{GasCode}"),
+		sdk.WithGasCode("{gascode}"),
 		sdk.WithPrivateKey("{PrivateKey}"))
 	if client == nil {
 		panic("client is nil")
 	}
-	ns, err := client.CreateNamespace("test", "Private", "{BitCoinAddress}", []string{"{BitCoinAddress}", "{BitCoinAddress}"})
+
+	ns, err := client.CreateNamespace("test123", "Private", "{BitCoinAddress}", []string{"{BitCoinAddress}"})
 	if err != nil {
 		panic(err)
 	}
