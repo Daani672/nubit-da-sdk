@@ -68,7 +68,6 @@ func WithCtx(ctx context.Context) Opt {
 func WithGasCode(code string) Opt {
 	return func(c *Option) {
 		c.PaymentParams.XAPIKEY = code
-		c.PaymentParams.LndProxyTarget = constant.NubitLndProxy
 	}
 }
 func WithLndProxy(target string) Opt {
@@ -110,6 +109,9 @@ func NewNubit(opts ...Opt) *NubitSDK {
 		op(sdk.Opts)
 	}
 	ctx = client.Background()
+	if sdk.Opts.PaymentParams.LndProxyTarget == "" {
+		sdk.Opts.PaymentParams.LndProxyTarget = constant.NubitLndProxy
+	}
 	if sdk.Opts.NubitRpc != "" {
 		ctx.NubitRpc = sdk.Opts.NubitRpc
 		ctx.ProxyRpc = sdk.Opts.ProxyRpc

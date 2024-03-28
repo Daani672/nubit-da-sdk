@@ -7,8 +7,10 @@ import (
 
 	bitcoin "github.com/bitcoinschema/go-bitcoin/v2"
 	"github.com/btcsuite/btcd/btcec/v2"
+	"github.com/btcsuite/btcd/btcec/v2/schnorr"
 	"github.com/btcsuite/btcd/btcutil"
 	"github.com/btcsuite/btcd/chaincfg"
+	"github.com/btcsuite/btcd/txscript"
 	"golang.org/x/crypto/sha3"
 )
 
@@ -21,12 +23,11 @@ const (
 
 func PrivateStrToBtcAddress(private string) string {
 	_, pub := btcec.PrivKeyFromBytes(PrivateStrToByte(private))
-	publicKeyHash := btcutil.Hash160(pub.SerializeUncompressed())
-	p2pkhAddr, err := btcutil.NewAddressPubKeyHash(publicKeyHash, &chaincfg.TestNet3Params)
+	taproot, err := btcutil.NewAddressTaproot(schnorr.SerializePubKey(txscript.ComputeTaprootKeyNoScript(pub)), &chaincfg.TestNet3Params)
 	if err != nil {
 		return ""
 	}
-	return p2pkhAddr.EncodeAddress()
+	return taproot.EncodeAddress()
 }
 
 func PrivateStrToEcdsa(private string) *ecdsa.PrivateKey {
